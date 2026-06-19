@@ -4,7 +4,7 @@ import { sendToWhatsApp } from './utils/whatsapp';
 import Header from './Header';
 import Footer from './Footer';
 
-export default function Apparel({ products, navigate }) {
+export default function Apparel({ products, hoodies = [], navigate }) {
   const [order, setOrder] = useState({ name: '', email: '', product: products[0].name, size: 'M', quantity: 1, notes: '' });
   const [orderMessage, setOrderMessage] = useState('');
 
@@ -38,11 +38,31 @@ export default function Apparel({ products, navigate }) {
               <div className="product-copy">
                 <h3>{product.name}</h3>
                 <p>{product.description}</p>
-                {/* <span className="product-price">{product.price}</span> */}
               </div>
             </article>
           ))}
         </div>
+
+        {hoodies.length > 0 && (
+          <>
+            <div className="section-heading" style={{ marginTop: 36 }}>
+              <p className="eyebrow">Hoodies</p>
+              <h2>Vine‑Vat Hoodies</h2>
+              <p>Cozy, logo-accented hoodies available in multiple colors.</p>
+            </div>
+            <div className="product-grid hoodie-grid">
+              {hoodies.map((h) => (
+                <article key={h.name} className="product-card">
+                  <img className="product-image" src={h.image} alt={h.name} />
+                  <div className="product-copy">
+                    <h3>{h.name}</h3>
+                    <p>{h.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </>
+        )}
 
         <div className="section-heading" style={{ marginTop: 36 }}>
           <h2>Place an order</h2>

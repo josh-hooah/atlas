@@ -17,7 +17,8 @@ export default function AppHub({ navigate }) {
           <p>Welcome to Atlasic Global — choose Atlasic Apparel for clothing or Atlasic Construction for painting & tiling services.</p>
           <div className="hero-actions">
             <button onClick={(e) => { e.preventDefault(); navigate('/apparel'); }} className="hero-button">Atlasic Apparel</button>
-            <button onClick={(e) => { e.preventDefault(); navigate('/construction'); }} className="hero-button secondary">Atlasic Construction</button>
+            <button onClick={(e) => { e.preventDefault(); navigate('/construction'); }} className="hero-button secondary">Atlasic Building  Group</button>
+            <button onClick={(e) => { e.preventDefault(); navigate('/work'); }} className="hero-button">Real Work</button>
           </div>
         </div>
       </header>

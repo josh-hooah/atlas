@@ -4,7 +4,7 @@ import { sendToWhatsApp } from './utils/whatsapp';
 import Header from './Header';
 import Footer from './Footer';
 
-export default function Construction({ services, navigate }) {
+export default function Construction({ services, navigate, paintingImages = [], tilingImages = [], plumbingImages = [] }) {
   const [booking, setBooking] = useState({ name: '', email: '', service: services[0].title, date: '', notes: '' });
   const [bookingMessage, setBookingMessage] = useState('');
 
@@ -31,7 +31,42 @@ export default function Construction({ services, navigate }) {
           <h2>Painting and tiling made easy</h2>
           <p>From concept to completion, our team brings precision and style to every room.</p>
         </div>
+        <div className="section-heading" style={{ marginTop: 36 }}>
+          <h3>Painting</h3>
+          <p>Our painting portfolio and recent projects.</p>
+        </div>
         <div className="card-grid">
+          {(paintingImages && paintingImages.length ? paintingImages : services.find(s => s.title.toLowerCase().includes('paint'))?.images || []).map((img, idx) => (
+            <article key={`paint-${idx}`} className="info-card">
+              <img className="service-image" src={img} alt={`Painting ${idx + 1}`} />
+            </article>
+          ))}
+        </div>
+
+        <div className="section-heading" style={{ marginTop: 36 }}>
+          <h3>Tiling</h3>
+          <p>Examples of tile installation, layouts and finishes.</p>
+        </div>
+        <div className="card-grid">
+          {(tilingImages && tilingImages.length ? tilingImages : services.find(s => s.title.toLowerCase().includes('tile'))?.images || []).map((img, idx) => (
+            <article key={`tile-${idx}`} className="info-card">
+              <img className="service-image" src={img} alt={`Tiling ${idx + 1}`} />
+            </article>
+          ))}
+        </div>
+
+        <div className="section-heading" style={{ marginTop: 36 }}>
+          <h3>Plumbing</h3>
+          <p>Plumbing installations, repairs and fittings.</p>
+        </div>
+        <div className="card-grid">
+          {(plumbingImages && plumbingImages.length ? plumbingImages : services.find(s => s.title.toLowerCase().includes('plumb'))?.images || []).map((img, idx) => (
+            <article key={`plumb-${idx}`} className="info-card">
+              <img className="service-image" src={img} alt={`Plumbing ${idx + 1}`} />
+            </article>
+          ))}
+        </div>
+        {/* <div className="card-grid">
           {services.map((service) => (
             <article key={service.title} className="info-card">
               <img className="service-image" src={service.image} alt={service.title} />
@@ -39,7 +74,7 @@ export default function Construction({ services, navigate }) {
               <p>{service.description}</p>
             </article>
           ))}
-        </div>
+        </div> */}
 
         <div className="section-heading" style={{ marginTop: 36 }}>
           <h2>Book a Service</h2>
