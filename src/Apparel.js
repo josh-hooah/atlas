@@ -4,8 +4,8 @@ import { sendToWhatsApp } from './utils/whatsapp';
 import Header from './Header';
 import Footer from './Footer';
 
-export default function Apparel({ products, hoodies = [], navigate }) {
-  const [order, setOrder] = useState({ name: '', email: '', product: products[0].name, size: 'M', quantity: 1, notes: '' });
+export default function Apparel({ shirts, hoodies = [], navigate }) {
+  const [order, setOrder] = useState({ name: '', email: '', shirts: shirts[0].name, size: 'M', quantity: 1, notes: '' });
   const [orderMessage, setOrderMessage] = useState('');
 
   const handleOrderChange = (e) => {
@@ -15,10 +15,10 @@ export default function Apparel({ products, hoodies = [], navigate }) {
 
   const handleOrderSubmit = (e) => {
     e.preventDefault();
-    const message = `Atlasic Apparel - New Order\nName: ${order.name}\nEmail: ${order.email}\nProduct: ${order.product}\nSize: ${order.size}\nQuantity: ${order.quantity}\nNotes: ${order.notes || '-'} `;
-    setOrderMessage(`Order received for ${order.quantity} x ${order.product}.`);
+    const message = `Atlasic Apparel - New Order\nName: ${order.name}\nEmail: ${order.email}\nshirts: ${order.shirts}\nSize: ${order.size}\nQuantity: ${order.quantity}\nNotes: ${order.notes || '-'} `;
+    setOrderMessage(`Order received for ${order.quantity} x ${order.shirts}.`);
     sendToWhatsApp(message);
-    setOrder({ name: '', email: '', product: products[0].name, size: 'M', quantity: 1, notes: '' });
+    setOrder({ name: '', email: '', shirts: shirts[0].name, size: 'M', quantity: 1, notes: '' });
   };
 
   return (
@@ -29,15 +29,17 @@ export default function Apparel({ products, hoodies = [], navigate }) {
         <div className="section-heading">
           <p className="eyebrow">Vine-Vat Collection</p>
           <h2>Atlasic Apparel</h2>
+
+          <h3>Vine-Vat T-Shirts</h3>
           <p>Premium pieces with minimalist design, built for comfort and confidence.</p>
         </div>
-        <div className="product-grid">
-          {products.map((product) => (
-            <article key={product.name} className="product-card">
-              <img className="product-image" src={product.image} alt={product.name} />
-              <div className="product-copy">
-                <h3>{product.name}</h3>
-                <p>{product.description}</p>
+        <div className="shirts-grid">
+          {shirts.map((shirts) => (
+            <article key={shirts.name} className="shirts-card">
+              <img className="shirts-image" src={shirts.image} alt={shirts.name} />
+              <div className="shirts-copy">
+                <h3>{shirts.name}</h3>
+                <p>{shirts.description}</p>
               </div>
             </article>
           ))}
@@ -46,15 +48,15 @@ export default function Apparel({ products, hoodies = [], navigate }) {
         {hoodies.length > 0 && (
           <>
             <div className="section-heading" style={{ marginTop: 36 }}>
-              <p className="eyebrow">Hoodies</p>
-              <h2>Vine‑Vat Hoodies</h2>
+              {/* <p className="eyebrow">Hoodies</p> */}
+              <h3>Vine‑Vat Hoodies</h3>
               <p>Cozy, logo-accented hoodies available in multiple colors.</p>
             </div>
-            <div className="product-grid hoodie-grid">
+            <div className="shirts-grid hoodie-grid">
               {hoodies.map((h) => (
-                <article key={h.name} className="product-card">
-                  <img className="product-image" src={h.image} alt={h.name} />
-                  <div className="product-copy">
+                <article key={h.name} className="shirts-card">
+                  <img className="shirts-image" src={h.image} alt={h.name} />
+                  <div className="shirts-copy">
                     <h3>{h.name}</h3>
                     <p>{h.description}</p>
                   </div>
@@ -79,9 +81,9 @@ export default function Apparel({ products, hoodies = [], navigate }) {
             <input required type="email" name="email" value={order.email} onChange={handleOrderChange} placeholder="alex@example.com" />
           </label>
           <label>
-            Product
-            <select name="product" value={order.product} onChange={handleOrderChange}>
-              {products.map((p) => (<option key={p.name}>{p.name}</option>))}
+            shirts
+            <select name="shirts" value={order.shirts} onChange={handleOrderChange}>
+              {shirts.map((p) => (<option key={p.name}>{p.name}</option>))}
             </select>
           </label>
           <div className="split-row">

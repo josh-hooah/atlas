@@ -68,23 +68,19 @@ const services = [
 
 const products = [
   {
-    name: 'Vine-Vat Denim Jacket',
-    description: 'Soft, structured denim crafted for everyday comfort.',
+    name: 'Vine-Vat T-Shirt',
+    description: 'Soft, structured, crafted for everyday comfort.',
     image: vinevat1,
   },
+
   {
-    name: 'Vine-Vat Hoodie (Burgundy)',
-    description: 'Classic Vine-Vat hoodie — cozy, lightweight and logo-accented.',
-    image: hoodie1,
-  },
-  {
-    name: 'Vine-Vat Hoodie (Black)',
-    description: 'Signature hoodie in black for a minimal, wearable look.',
+    name: 'Vine-Vat Denim jacket (Black)',
+    description: 'Signature jacket in black for a minimal, wearable look.',
     image: hoodie2,
   },
   {
-    name: 'Vine-Vat Chill Hoodie',
-    description: 'Lightweight hoodie with a clean signature logo for layered style.',
+    name: 'Vine-Vat Chill T-Shirt',
+    description: 'Lightweight T-shirt with a clean signature logo for layered style.',
     image: vinevat2,
   },
   {
@@ -93,9 +89,14 @@ const products = [
     image: vinevat3,
   },
   {
-    name: 'Vine-Vat Hoodie (White)',
+    name: 'Vine-Vat Hoodie (Burgundy)',
     description: 'Crisp white hoodie — versatile and comfortable.',
     image: hoodie3,
+  }, 
+  {
+    name: 'Vine-Vat Hoodie (White)',
+    description: 'Classic Vine-Vat hoodie — cozy, lightweight and logo-accented.',
+    image: hoodie1,
   },
 ];
 
@@ -105,6 +106,7 @@ export default function App() {
   const [route, setRoute] = useState(window.location.pathname || '/');
 
   const hoodies = products.filter((p) => p.name.toLowerCase().includes('hoodie'));
+  const shirts = products.filter((p) => p.name.toLowerCase().includes('shirt', 'jacket'));
 
   useEffect(() => {
     const onPop = () => setRoute(window.location.pathname || '/');
@@ -119,7 +121,7 @@ export default function App() {
   };
 
   if (route === '/apparel') {
-    return <Apparel products={products} hoodies={hoodies} navigate={navigate} />;
+    return <Apparel shirts={shirts} hoodies={hoodies} navigate={navigate} />;
   }
 
   if (route === '/construction') {
